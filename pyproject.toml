@@ -1,0 +1,26 @@
+[project]
+name = "dspace-requests-wrapper"
+version = "1.0.0"
+description = "A wrapper around the requests session object to make interacting with the DSpace API easier"
+readme = "README.md"
+authors = [
+    { name = "Kevin Bowrin", email = "kevinbowrin@cunet.carleton.ca" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.32.4",
+    "requests-toolbelt>=1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "codespell>=2.4.1",
+    "mypy>=1.17.0",
+    "ruff>=0.12.3",
+    "types-requests>=2.32.4.20250611",
+]
+
