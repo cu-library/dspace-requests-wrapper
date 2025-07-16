@@ -34,13 +34,13 @@ class DSpaceSession(requests.Session):
     the session's X-XSRF-TOKEN request header is updated with new versions of the CSRF token from
     the DSPACE-XSRF-TOKEN response header.
 
-    This class also sends a form-encoded POST request to /authn/login with the provided username and password
+    This class also sends a form-encoded POST request to /api/authn/login with the provided username and password
     on initialization. The API returns a JWT bearer token, which is stored in the session's Authentication header.
     When making a request, this class checks that the stored bearer token isn't within TOKEN_EXPIRY_BUFFER_SECONDS
-    of expiring, currently set to 5 minutes. If it is, it sends a POST request to /authn/login with no parameters,
+    of expiring, currently set to 5 minutes. If it is, it sends a POST request to /api/authn/login with no parameters,
     and stores the new bearer token in the session's Authentication header.
 
-    This class will also prepend the provided endpoint to request urls which start with "/".
+    This class will also prepend the provided endpoint to request URL which start with "/".
     """
 
     def __init__(self, endpoint: str, username: str, password: str, *args, **kwargs):

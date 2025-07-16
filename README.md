@@ -13,14 +13,17 @@ Per the DSpace RestContract documentation:
 "The client MUST store/keep a copy of this CSRF token (usually by watching for the DSPACE-XSRF-TOKEN header in every response), and 
 update that stored copy whenever a new token is sent." 
 https://github.com/DSpace/RestContract/blob/main/csrf-tokens.md
-In this class, we override the request() method so that on every call to the API, the session's X-XSRF-TOKEN request header is updated 
+In this class, we override the request() method so that on every call to the API, the session's X-XSRF-TOKEN request header is updated
 with new versions of the CSRF token from the DSPACE-XSRF-TOKEN response header.
 
-This class also sends a form-encoded POST request to /authn/login with the provided username and password on initialization. 
+This class also sends a form-encoded POST request to /api/authn/login with the provided username and password on initialization.
 The API returns a JWT bearer token, which is stored in the session's Authentication header.
 When making a request, this class checks that the stored bearer token isn't within 5 minutes of expiring.
-If it is, it sends a POST request to /authn/login with no parameters, and stores the new bearer token in the session's 
+If it is, it sends a POST request to /api/authn/login with no parameters, and stores the new bearer token in the session's
 Authentication header.
+
+Since the session knows the server endpoint, you can make requests to URLs like "/actuator/health" or "/api/core/communities",
+and the server endpoint will be automatically prepended.
 
 ## Example
 
@@ -29,6 +32,7 @@ import pprint
 import dspace_requests_wrapper
 
 s = space_requests_wrapper.DSpaceSession("https://your.dspace.here/server", "auserhere", "hunter42")
+# Make a GET request to https://your.dspace.here/server/actuator/info with valid CSRF and Authentication headers:
 pprint.pprint(s.get("/actuator/info").json)
 ```
 
