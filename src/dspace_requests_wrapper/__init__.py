@@ -41,6 +41,15 @@ class DSpaceSession(requests.Session):
     and stores the new bearer token in the session's Authentication header.
 
     This class will also prepend the provided endpoint to request URL which start with "/".
+
+    Unlike the underlying Session class, this class can raise exceptions on initialization, if the username or
+    password arguments are empty or if the server endpoint URL does not start with http:// or https://.
+    It may also raise an exception on initialization if the initial authentication request to /api/authn/login
+    fails with a non-200 status code.
+
+    Also unlike the underlying Session class, this class will raise exceptions when making requests if the
+    authentication token is expired and the request to /api/authn/login to refresh the token fails with
+    a non-200 status code.
     """
 
     def __init__(self, endpoint: str, username: str, password: str, *args, **kwargs):

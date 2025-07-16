@@ -22,6 +22,15 @@ When making a request, this class checks that the stored bearer token isn't with
 If it is, it sends a POST request to /api/authn/login with no parameters, and stores the new bearer token in the session's
 Authentication header.
 
+Unlike the underlying Session class, DSpaceSession can raise exceptions on initialization, if the username or
+password arguments are empty or if the server endpoint URL does not start with http:// or https://.
+It may also raise an exception on initialization if the initial authentication request to /api/authn/login
+fails with a non-200 status code.
+
+Also unlike the underlying Session class, DSpaceSession will raise exceptions when making requests if the
+authentication token is expired and the request to /api/authn/login to refresh the token fails with
+a non-200 status code.
+
 Since the session knows the server endpoint, you can make requests to URLs like "/actuator/health" or "/api/core/communities",
 and the server endpoint will be automatically prepended.
 
