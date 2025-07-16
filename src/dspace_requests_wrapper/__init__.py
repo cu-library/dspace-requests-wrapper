@@ -109,9 +109,6 @@ class DSpaceSession(requests.Session):
         if url.startswith("/"):
             url = self.__endpoint + url
         response = super().request(method, url, **kwargs)
-        self.__update_csrf_token(response)
-        return response
-
-    def __update_csrf_token(self, response):
         if "DSPACE-XSRF-TOKEN" in response.headers:
             self.headers["X-XSRF-TOKEN"] = response.headers["DSPACE-XSRF-TOKEN"]
+        return response
