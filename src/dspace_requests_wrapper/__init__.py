@@ -104,6 +104,7 @@ class DSpaceSession(requests.Session):
 
     def request(self, method, url, **kwargs):
         if self.expiry and time.time() + TOKEN_EXPIRY_BUFFER_SECONDS >= self.expiry:
+            self.expiry = None
             self.__refresh_authentication_token()
         if url.startswith("/"):
             url = self.__endpoint + url
