@@ -234,7 +234,8 @@ large_file_metadata = {
 
 with open(large_file_filepath, "rb") as large_file:
     files = {
-        "file": large_file,
+        # "file": large_file, # This does NOT work! You MUST use a tuple here with the filename.
+        "file": ("bigfile.mp4", large_file),
         "properties": (None, json.dumps(large_file_metadata), "application/json"),
     }
 
