@@ -251,7 +251,7 @@ with open(large_file_filepath, "rb") as large_file:
             a = e.read(16384)
 
     response = s.post(
-        "/api/core/bundles/A_BUNDLE_UUID",
+        "/api/core/bundles/A_BUNDLE_UUID/bitstreams",
         data=gen(),
         headers={"Content-Type": e.content_type},
     )
