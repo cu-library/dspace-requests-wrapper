@@ -10,6 +10,11 @@ requires-python = ">=3.9"
 dependencies = [
     "requests>=2.32.4",
 ]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+GitHub = "https://github.com/cu-library/dspace_requests_wrapper"
 
 [build-system]
 requires = ["hatchling"]
