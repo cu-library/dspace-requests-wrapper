@@ -1,6 +1,6 @@
 [project]
 name = "dspace-requests-wrapper"
-version = "1.0.2"
+version = "1.0.3"
 description = "A wrapper around the requests session object to make interacting with the DSpace API easier"
 readme = "README.md"
 authors = [
@@ -25,6 +25,9 @@ build-backend = "hatchling.build"
 dev = [
     "codespell>=2.4.1",
     "mypy>=1.17.0",
+    "pytest>=8.4.1",
+    "pytest-mock>=3.14.1",
+    "requests-mock>=1.12.1",
     "requests-toolbelt>=1.0.0",
     "ruff>=0.12.3",
     "types-requests>=2.32.4.20250611",
