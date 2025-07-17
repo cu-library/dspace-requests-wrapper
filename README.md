@@ -9,16 +9,16 @@ It handles authentication bearer tokens and CSRF tokens on behalf of the user.
 The endpoint URL should be in the form "https://your.dspace.domain.here.org/server". It should present the user with the HAL browser 
 when visiting from a web browser. Most API endpoints append "/api/path/here" to the server endpoint, except the actuator endpoints.
 
-Per the DSpace RestContract documentation:
+Per the DSpace RestContract documentation:  
 "The client MUST store/keep a copy of this CSRF token (usually by watching for the DSPACE-XSRF-TOKEN header in every response), and 
-update that stored copy whenever a new token is sent." 
-https://github.com/DSpace/RestContract/blob/main/csrf-tokens.md
-In this class, we override the request() method so that on every call to the API, the session's X-XSRF-TOKEN request header is updated
+update that stored copy whenever a new token is sent."  
+https://github.com/DSpace/RestContract/blob/main/csrf-tokens.md  
+In DSpaceSession, we override the request() method so that on every call to the API, the session's X-XSRF-TOKEN request header is updated
 with new versions of the CSRF token from the DSPACE-XSRF-TOKEN response header.
 
-This class also sends a form-encoded POST request to /api/authn/login with the provided username and password on initialization.
+DSpaceSession also sends a form-encoded POST request to /api/authn/login with the provided username and password on initialization.
 The API returns a JWT bearer token, which is stored in the session's Authentication header.
-When making a request, this class checks that the stored bearer token isn't within 5 minutes of expiring.
+When making a request, it checks that the stored bearer token isn't within 5 minutes of expiring.
 If it is, it sends a POST request to /api/authn/login with no parameters, and stores the new bearer token in the session's
 Authentication header.
 
