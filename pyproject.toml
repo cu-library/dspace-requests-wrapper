@@ -14,7 +14,8 @@ license = "MIT"
 license-files = ["LICENSE"]
 
 [project.urls]
-GitHub = "https://github.com/cu-library/dspace_requests_wrapper"
+Homepage = "https://github.com/cu-library/dspace_requests_wrapper"
+Issues = "https://github.com/cu-library/dspace_requests_wrapper/issues"
 
 [build-system]
 requires = ["hatchling"]
