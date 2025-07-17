@@ -100,27 +100,25 @@ version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "requests" },
-    { name = "requests-toolbelt" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "codespell" },
     { name = "mypy" },
+    { name = "requests-toolbelt" },
     { name = "ruff" },
     { name = "types-requests" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "requests", specifier = ">=2.32.4" },
-    { name = "requests-toolbelt", specifier = ">=1.0.0" },
-]
+requires-dist = [{ name = "requests", specifier = ">=2.32.4" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "codespell", specifier = ">=2.4.1" },
     { name = "mypy", specifier = ">=1.17.0" },
+    { name = "requests-toolbelt", specifier = ">=1.0.0" },
     { name = "ruff", specifier = ">=0.12.3" },
     { name = "types-requests", specifier = ">=2.32.4.20250611" },
 ]
