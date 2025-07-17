@@ -1,6 +1,6 @@
 [project]
 name = "dspace-requests-wrapper"
-version = "1.0.1"
+version = "1.0.2"
 description = "A wrapper around the requests session object to make interacting with the DSpace API easier"
 readme = "README.md"
 authors = [
