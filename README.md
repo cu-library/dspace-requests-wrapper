@@ -42,7 +42,7 @@ and the server endpoint will be automatically prepended.
 import pprint
 import dspace_requests_wrapper
 
-s = space_requests_wrapper.DSpaceSession("https://your.dspace.here/server", "auserhere", "hunter42")
+s = dspace_requests_wrapper.DSpaceSession("https://your.dspace.here/server", "auserhere", "hunter42")
 
 # Make a GET request to https://your.dspace.here/server/actuator/info with valid CSRF and Authentication headers:
 pprint.pprint(s.get("/actuator/info").json())
