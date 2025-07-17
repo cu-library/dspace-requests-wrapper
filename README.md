@@ -239,22 +239,34 @@ with open(large_file_filepath, "rb") as large_file:
         "properties": (None, json.dumps(large_file_metadata), "application/json"),
     }
 
-    e = encoder.MultipartEncoder(files)
-    # You can monitor the upload by adding a monitor and a lambda.
-    #e = encoder.MultipartEncoderMonitor(e, lambda a: print(a.bytes_read, end="\r"))
-
-    # A generator function, which yields 16384 byte chunks of the underlying file.
-    def gen():
-        a = e.read(16384)
-        while a:
-            yield a
-            a = e.read(16384)
+    encoder = encoder.MultipartEncoder(files)
+    # You can monitor the upload by using the MultipartEncoderMonitor instead of the encoder as the data
+    # parameter value.
+    #monitor = encoder.MultipartEncoderMonitor(e, lambda a: print(a.bytes_read, end="\r"))
 
     response = s.post(
         "/api/core/bundles/A_BUNDLE_UUID/bitstreams",
-        data=gen(),
+        data=encoder,
+        #data=monitor,
         headers={"Content-Type": e.content_type},
     )
+
+    # A possible workaround (?) for the hardcoded read size mentioned here:
+    # https://toolbelt.readthedocs.io/en/latest/uploading-data.html#requests_toolbelt.multipart.encoder.MultipartEncoder
+    # In practice, our upload speed was the same with or without using the generator. YMMV
+
+    # A generator function, which yields 16384 byte chunks of the underlying file.
+    #def gen():
+    #    a = e.read(16384)
+    #    while a:
+    #        yield a
+    #        a = e.read(16384)
+    #
+    #response = s.post(
+    #    "/api/core/bundles/A_BUNDLE_UUID/bitstreams",
+    #    data=gen(),
+    #    headers={"Content-Type": e.content_type},
+    #)
     response.raise_for_status()
     print("Response from API when creating the bitstream:")
     pprint.pprint(response.json())
