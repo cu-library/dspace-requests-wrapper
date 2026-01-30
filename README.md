@@ -1,5 +1,7 @@
 # DSpace Requests Wrapper
 
+[![Build Status](https://github.com/cu-library/dspace-requests-wrapper/actions/workflows/ci.yml/badge.svg)](https://github.com/cu-library/dspace-requests-wrapper/actions/workflows/ci.yml)
+
 A wrapper around the Request library's Session which makes API calls to DSpace easier to manage.
 
 This library provides a class, DSpaceSession, which handles username and password based authentication, not Shibboleth authentication.
