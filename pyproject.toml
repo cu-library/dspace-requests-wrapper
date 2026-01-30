@@ -33,3 +33,12 @@ dev = [
     "types-requests>=2.32.4.20250611",
 ]
 
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = [
+    "tests.py",
+    "test_*.py",
+    "*_test.py",
+]
